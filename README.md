@@ -1,5 +1,5 @@
 ### About Project
-  An authenticated user registration and login api with express, mongo and passport.
+  A real time chat application with express, mongo, passport, and socket.
 
 ### Installation Instruction
 #### Dependencies:
