@@ -2,23 +2,13 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/user');
 const config = require('../config/main');
+const setUserInfo = require('../helpers').setUserInfo;
+const getRole = require('../helpers').getRole;
 
 function generateToken(user) {
   return jwt.sign(user, config.secret, {
     expiresIn: 10080 // in seconds
   });
-}
-
-// Set user info from request
-function setUserInfo(request) {
-  return {
-    _id: request._id,
-    firstName: request.profile.firstName,
-    lastName: request.profile.lastName,
-    companyName: request.profile.companyName,
-    email: request.email,
-    role: request.role,
-  };
 }
 
 //========================================
@@ -115,12 +105,11 @@ exports.roleAuthorization = function(role) {
       }
 
       // If user is found, check role.
-      if (foundUser.role == role) {
+      if (getRole(foundUser.role) >= getRole(requiredRole)) {
         return next();
       }
 
       res.status(401).json({ error: 'You are not authorized to view this content.' });
-      return next('Unauthorized');
     })
   }
 }
