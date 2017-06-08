@@ -12,7 +12,8 @@ const session = require('express-session');
 const path = require('path');
 
 // Database Connection
-mongoose.connect(config.database);
+mongoose.connect(process.env.DATACENTRE_DB);
+// mongoose.connect(config.database);
 const { connection: db } = mongoose;
 
 db.on('error', console.error.bind(console, 'connection error:'));
