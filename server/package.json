@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -S --ui bdd --require ./tests/spec_helper.js --recursive ./tests --reporter spec",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,13 +13,18 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "crypto": "0.0.3",
+    "ejs": "^2.5.6",
     "express": "^4.15.3",
+    "express-session": "*",
     "jsonwebtoken": "^7.4.1",
+    "mocha": "^3.4.2",
     "mongoose": "^4.10.4",
     "morgan": "^1.8.2",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
-    "socket.io": "^2.0.2"
+    "should": "^11.2.1",
+    "socket.io": "^2.0.2",
+    "supertest": "^3.0.0"
   }
 }

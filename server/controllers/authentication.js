@@ -4,6 +4,8 @@ const User = require('../models/user');
 const config = require('../config/main');
 const setUserInfo = require('../helpers').setUserInfo;
 const getRole = require('../helpers').getRole;
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 function generateToken(user) {
   return jwt.sign(user, config.secret, {
@@ -11,10 +13,77 @@ function generateToken(user) {
   });
 }
 
+//............................................APP(views)...................................................
 //========================================
-// Login Route
+// login function for app (views)
 //========================================
-exports.login = function(req, res, next) {
+exports.login = passport.authenticate('local', {
+      successRedirect : '/dashboard', // redirect to the secure profile section
+      failureRedirect : '/login', // redirect back to the signup page if there is an error
+      failureFlash : true // allow flash messages
+  });
+
+//=================================================
+// Registration function for app(views)
+//=================================================
+exports.register = function(req, res, next) {
+  // Check for registration errors
+  const email = req.body.email;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const companyName = req.body.companyName;
+  const password = req.body.password;
+
+  // Return error if no email provided
+  if (!email) {
+    return res.status(422).send({ error: 'You must enter an email address.'});
+  }
+
+  // Return error if full name not provided
+  if (!firstName || !lastName) {
+    return res.status(422).send({ error: 'You must enter your full name.'});
+  }
+
+  // Return error if company name not provided
+  if (!companyName) {
+    return res.status(422).send({ error: 'You must enter your company name.'});
+  }
+
+  // Return error if no password provided
+  if (!password) {
+    return res.status(422).send({ error: 'You must enter a password.' });
+  }
+
+  User.findOne({ email: email }, function(err, existingUser) {
+      if (err) { return next(err); }
+
+      // If user is not unique, return error
+      if (existingUser) {
+        return res.status(422).send({ error: 'That email address is already in use.' });
+      }
+
+      // If email is unique and password was provided, create account
+      let user = new User({
+        email: email,
+        password: password,
+        profile: { firstName: firstName, lastName: lastName, companyName: companyName }
+      });
+
+      user.save(function(err, user) {
+        if (err) { return next(err); }
+
+        // Respond with JWT if user was created
+        let userInfo = setUserInfo(user);
+      });
+      res.render('login');
+  });
+}
+
+// ............................................API........................................................
+//========================================
+// login function for login Route API
+//========================================
+exports.loginApi = function(req, res, next) {
 
   let userInfo = setUserInfo(req.user);
 
@@ -25,10 +94,10 @@ exports.login = function(req, res, next) {
 }
 
 
-//========================================
-// Registration Route
-//========================================
-exports.register = function(req, res, next) {
+//=================================================
+// Registration function for registration route API
+//=================================================
+exports.registerApi = function(req, res, next) {
   // Check for registration errors
   const email = req.body.email;
   const firstName = req.body.firstName;
@@ -90,7 +159,7 @@ exports.register = function(req, res, next) {
 }
 
 //========================================
-// Authorization Middleware
+// Authorization Middleware API?????????
 //========================================
 
 // Role authorization check
