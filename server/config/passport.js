@@ -22,6 +22,16 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
   });
 });
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.getUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 const jwtOptions = {
   // Telling Passport to check authorization headers for JWT
   jwtFromRequest: ExtractJwt.fromAuthHeader(),

@@ -3,7 +3,7 @@ const Conversation = require('../models/conversation');
 const Message = require('../models/message');
 const User = require('../models/user');
 
-exports.getConversations = function(req, res, next) {
+exports.getConversationsApi = function(req, res, next) {
   // Only return one message from each conversation to display as snippet
   Conversation.find({ participants: req.user._id })
     .select('_id')
@@ -38,7 +38,7 @@ exports.getConversations = function(req, res, next) {
 }
 
 // set up controller to get all the messages in a single conversation
-exports.getConversation = function(req, res, next) {
+exports.getConversationApi = function(req, res, next) {
   Message.find({ conversationId: req.params.conversationId })
     .select('createdAt body author')
     .sort('-createdAt')
@@ -57,7 +57,7 @@ exports.getConversation = function(req, res, next) {
   }
 
 // for starting a new conversation
-  exports.newConversation = function(req, res, next) {
+  exports.newConversationApi = function(req, res, next) {
   if(!req.params.recipient) {
     res.status(422).send({ error: 'Please choose a valid recipient for your message.' });
     return next();
@@ -98,7 +98,7 @@ exports.getConversation = function(req, res, next) {
 
 // sending a reply or adding a new message to existing conversation
 //refactor this later
-exports.sendReply = function(req, res, next) {
+exports.sendReplyApi = function(req, res, next) {
   const reply = new Message({
     conversationId: req.params.conversationId,
     body: req.body.composedMessage,

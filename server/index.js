@@ -5,6 +5,11 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const config = require('./config/main');
 const router = require('./router');
+const passport = require('passport');
+// Express session middleware
+const session = require('express-session');
+// Utilities for working with file and dir paths
+const path = require('path');
 
 // Database Connection
 mongoose.connect(config.database);
@@ -24,6 +29,28 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
+
+// Express session
+app.use(session({
+  // Secret can be anything
+  //hide in dot env
+  secret: 'jelly bean',
+  saveUninitialized: true,
+  resave: true,
+}));
+
+// Public folder for publicly accessible files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Init passport
+app.use(passport.initialize());
+app.use(passport.session());
+// View engine (ejs)
+// Want folder views to handle views
+app.set('views', path.join(__dirname, 'views'));
+// Default layout in layouts folder
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

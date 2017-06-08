@@ -2,9 +2,15 @@ const User = require('../models/user');
 const setUserInfo = require('../helpers').setUserInfo;
 
 //= =======================================
-// User Routes
+// App user profile
 //= =======================================
-exports.viewProfile = function (req, res, next) {
+
+// to do
+
+//= =======================================
+// API user profile
+//= =======================================
+exports.viewProfileApi = function (req, res, next) {
   const userId = req.params.userId;
 
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }

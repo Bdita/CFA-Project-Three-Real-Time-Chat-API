@@ -4,5 +4,5 @@ module.exports = {
   // Database connection information
   'database': 'mongodb://localhost:27017/ohmDataCentre',
   // Setting port for server
-  'port': process.env.PORT || 3000
+  'port': process.env.PORT || 3000  
 }
