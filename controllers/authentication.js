@@ -18,7 +18,7 @@ function generateToken(user) {
 // login function for app (views)
 //========================================
 exports.login = passport.authenticate('local', {
-      successRedirect : '/dashboard', // redirect to the secure profile section
+      successRedirect : '/dashboard', // redirect to the secure dashboard section
       failureRedirect : '/login', // redirect back to the signup page if there is an error
       failureFlash : true // allow flash messages
   });
