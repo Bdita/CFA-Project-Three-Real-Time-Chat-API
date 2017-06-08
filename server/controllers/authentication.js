@@ -12,20 +12,17 @@ function generateToken(user) {
     expiresIn: 10080 // in seconds
   });
 }
+
 //............................................APP(views)...................................................
 //========================================
 // login function for app (views)
 //========================================
-exports.login = function(req, res, next) {
-  passport.authenticate('local', {successRedirect: '/dashboard', failureRedirect: '/login', failureFlash: true});
-}
+exports.login = passport.authenticate('local', {
+      successRedirect : '/dashboard', // redirect to the secure profile section
+      failureRedirect : '/login', // redirect back to the signup page if there is an error
+      failureFlash : true // allow flash messages
+  });
 
-
-// router.post('/login',
-//   passport.authenticate('local', {successRedirect: '/', failureRedirect: '/users/login', failureFlash: true}),
-//   function(req, res) {
-//     res.redirect('/');
-//   });
 //=================================================
 // Registration function for app(views)
 //=================================================
@@ -78,7 +75,7 @@ exports.register = function(req, res, next) {
         // Respond with JWT if user was created
         let userInfo = setUserInfo(user);
       });
-      res.render('/login');
+      res.render('login');
   });
 }
 
@@ -166,22 +163,22 @@ exports.registerApi = function(req, res, next) {
 //========================================
 
 // Role authorization check
-// exports.roleAuthorization = function(role) {
-//   return function(req, res, next) {
-//     const user = req.user;
-//
-//     User.findById(user._id, function(err, foundUser) {
-//       if (err) {
-//         res.status(422).json({ error: 'No user was found.' });
-//         return next(err);
-//       }
-//
-//       // If user is found, check role.
-//       if (getRole(foundUser.role) >= getRole(requiredRole)) {
-//         return next();
-//       }
-//
-//       res.status(401).json({ error: 'You are not authorized to view this content.' });
-//     })
-//   }
-// }
+exports.roleAuthorization = function(role) {
+  return function(req, res, next) {
+    const user = req.user;
+
+    User.findById(user._id, function(err, foundUser) {
+      if (err) {
+        res.status(422).json({ error: 'No user was found.' });
+        return next(err);
+      }
+
+      // If user is found, check role.
+      if (getRole(foundUser.role) >= getRole(requiredRole)) {
+        return next();
+      }
+
+      res.status(401).json({ error: 'You are not authorized to view this content.' });
+    })
+  }
+}
