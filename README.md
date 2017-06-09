@@ -3,29 +3,29 @@
 
 ### Design Process
 #### Project Discovery:
-      A requirement gathering workshop was conducted with client to explore more about his business problems and expectation.
-      Following questions were asked and response(couple of word that come in his mind) was collected in sticky notes. Random thoughts were organised under specific topics which gave us a clear understanding of his business problems and possible solutions to work on. The client needed three solutions to solve his current problems.
-      1. Responsive Website with CMS (for online presence and marketing purpose)
-      2. Customer Support Chat service (to facilitate the frequent communication between his business clients and support staff)
-      3. A feature to allow customers to calculate the price of cloud services
+  A requirement gathering workshop was conducted with client to explore more about his business problems and expectation.
+  Following questions were asked and response(couple of word that come in his mind) was collected in sticky notes. Random thoughts were organised under specific topics which gave us a clear understanding of his business problems and possible solutions to work on. The client needed three solutions to solve his current problems.
+  1. Responsive Website with CMS (for online presence and marketing purpose)
+  2. Customer Support Chat service (to facilitate the frequent communication between his business clients and support staff)
+  3. A feature to allow customers to calculate the price of cloud services
 
-      For the scope of CFA's third project, we decided to start with chat feature (server side- restful API) due to the requirement of using JS stack.
+  For the scope of CFA's third project, we decided to start with chat feature (server side- restful API) due to the requirement of using JS stack.
 
-      ![workshop](http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965262/DSC_0047_btb0qv.jpg)
+  <img src="http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965262/DSC_0047_btb0qv.jpg" alt="workshop image" />
 
-      ![workshop](http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965272/DSC_0053_y0keow.jpg)
+  <img src="http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965272/DSC_0053_y0keow.jpg" alt="workshop image" />
 
 #### Project Charter:
-    A project requirement documentation was prepared and signed off by the client. As the project progressed, the charter was revised as needed.
+  A project requirement documentation was prepared and signed off by the client. As the project progressed, the charter was revised as needed.
 
-    ![charter](http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965439/Screen_Shot_2017-06-09_at_9.42.44_am_o2uoy9.png)
+  <img src="http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965439/Screen_Shot_2017-06-09_at_9.42.44_am_o2uoy9.png" alt="project charter" />
 
 ###  API Development(Agile):
-    A full web solution architecture was designed. Then, the whole solution was divided into deliverable mini-projects, one of which includes chat API. API was built using express framework. User and session authentication is managed using passport and jsonwebtoken. Using socket.io, the server is made ready to listen to the clients messages. However, this functionality is not fully developed as it requires a client and further refactoring and modification.
+  A full web solution architecture was designed. Then, the whole solution was divided into deliverable mini-projects, one of which includes chat API. API was built using express framework. User and session authentication is managed using passport and jsonwebtoken. Using socket.io, the server is made ready to listen to the clients messages. However, this functionality is not fully developed as it requires a client and further refactoring and modification.
 
-    ![architecture](http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965439/Screen_Shot_2017-06-09_at_9.42.44_am_o2uoy9.png)
+  <img src="http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965439/Screen_Shot_2017-06-09_at_9.42.44_am_o2uoy9.png" alt="app architecture" />
 
-    ![project breakdown](http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965956/Screen_Shot_2017-06-09_at_9.51.19_am_jimb3m.png)
+  <img src="http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965956/Screen_Shot_2017-06-09_at_9.51.19_am_jimb3m.png" alt="project breakdown" />
 
 ### Installation Instruction for local use
 #### Dependencies:
