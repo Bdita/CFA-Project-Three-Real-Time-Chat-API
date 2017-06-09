@@ -23,10 +23,10 @@
 ###  API Development(Agile):
   A full web solution architecture was designed. Then, the whole solution was divided into deliverable mini-projects, one of which includes chat API. API was built using express framework. User and session authentication is managed using passport and jsonwebtoken. Using socket.io, the server is made ready to listen to the clients messages. However, this functionality is not fully developed as it requires a client and further refactoring and modification.
 
-  <img src="http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965439/Screen_Shot_2017-06-09_at_9.42.44_am_o2uoy9.png" alt="app architecture" />
+  <img src="http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965301/Screen_Shot_2017-06-08_at_7.18.54_pm_kbpxks.png" alt="app architecture" />
 
   <img src="http://res.cloudinary.com/dihqhbf9i/image/upload/v1496965956/Screen_Shot_2017-06-09_at_9.51.19_am_jimb3m.png" alt="project breakdown" />
-
+  
 ### Installation Instruction for local use
 #### Dependencies:
 bcrypt-nodejs:
