@@ -25,7 +25,9 @@ module.exports = function(app) {
   // Main Auth Routes
   //=========================
   //Set auth routes as subgroup/middleware to mainRoutes
-  mainRoutes.use('/', authRoutes);
+  mainRoutes.use('/', authRoutes, function(req, res) {
+    res.render('index');
+  });
 
   // Registration route
   authRoutes.get('/register', function(req, res) {
